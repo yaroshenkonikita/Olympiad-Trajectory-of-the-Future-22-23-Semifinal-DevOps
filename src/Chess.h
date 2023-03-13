@@ -11,7 +11,7 @@ public:
     typedef enum ChessFieldMarker { A, B, C, D, E, F, G, H } ChessPosition;
 
     Chess();
-    Chess(Piece piece_for_fill);
+    Chess(Piece &piece_for_fill);
     ~Chess() = default;
 
     Piece &GetPiece(ChessPosition positionMarker, uint8_t positionNumber);

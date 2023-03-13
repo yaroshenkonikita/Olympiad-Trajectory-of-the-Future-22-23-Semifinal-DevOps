@@ -32,7 +32,7 @@ Chess::Chess() {
     }
 }
 
-Chess::Chess(Piece piece_for_fill) {
+Chess::Chess(Piece &piece_for_fill) {
     for (auto &AxisNumber : ChessField) {
         for (auto &AxisMarker : AxisNumber) {
             AxisMarker = piece_for_fill;
