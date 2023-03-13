@@ -5,7 +5,7 @@ Chess::Chess() {
     for (int AxisNumber{}; AxisNumber < 8; AxisNumber++) {
         if (AxisNumber == 2) AxisNumber += 4;
         for (int AxisMarker{}; AxisMarker < 8; AxisMarker++) {
-            Piece::ChessColor color = Piece::NONE;
+            Piece::PieceColor color = Piece::NONE;
             if (AxisNumber > 5) {
                 color = Piece::BLACK;
             } else if (AxisNumber < 2) {
@@ -33,9 +33,9 @@ Chess::Chess() {
 }
 
 Chess::Chess(Piece &piece_for_fill) {
-    for (auto &AxisNumber : ChessField) {
-        for (auto &AxisMarker : AxisNumber) {
-            AxisMarker = piece_for_fill;
+    for (auto &RowPieces : ChessField) {
+        for (auto &piece : RowPieces) {
+            piece = piece_for_fill;
         }
     }
 }
@@ -47,7 +47,7 @@ Piece &Chess::GetPiece(ChessPosition positionMarker, uint8_t positionNumber) {
     return ChessField[positionNumber - 1][positionMarker];
 }
 
-int Chess::UnderAttackOnDiagonally(Piece::ChessColor ColorPiece, int xAxisPos, int yAxisPos) {
+int Chess::UnderAttackOnDiagonally(Piece::PieceColor ColorPiece, int xAxisPos, int yAxisPos) {
     int IncrementX = -1, IncrementY = -1;
     for (int i{}; i < 4; i++) {
         unsigned int xAxis = xAxisPos, yAxis = yAxisPos;
@@ -64,9 +64,9 @@ int Chess::UnderAttackOnDiagonally(Piece::ChessColor ColorPiece, int xAxisPos, i
                 if (current.GetPiece() == Piece::KING && current.GetColor() != ColorPiece) {
                     return Piece::KING;
                 } else if (current.GetPiece() == Piece::PAWN && current.GetColor() != ColorPiece) {
-                    if (ColorPiece == Piece::ChessColor::WHITE && (yAxis - yAxisPos) == 1) {
+                    if (ColorPiece == Piece::PieceColor::WHITE && (yAxis - yAxisPos) == 1) {
                         return Piece::PAWN;
-                    } else if (ColorPiece == Piece::ChessColor::BLACK && (yAxisPos - yAxis) == 1) {
+                    } else if (ColorPiece == Piece::PieceColor::BLACK && (yAxisPos - yAxis) == 1) {
                         return Piece::PAWN;
                     }
                 }
@@ -83,7 +83,7 @@ int Chess::UnderAttackOnDiagonally(Piece::ChessColor ColorPiece, int xAxisPos, i
     return 0;
 }
 
-int Chess::UnderAttackOnHorizontally(Piece::ChessColor ColorPiece, int xAxisPos, int yAxisPos) {
+int Chess::UnderAttackOnHorizontally(Piece::PieceColor ColorPiece, int xAxisPos, int yAxisPos) {
     int IncrementX = -1, IncrementY{};
     for (int i{}; i < 4; i++) {
         unsigned int xAxis = xAxisPos, yAxis = yAxisPos;
@@ -125,4 +125,27 @@ int Chess::IsUnderAttack(ChessPosition positionMarker, uint8_t positionNumber) {
         return res;
     }
     return UnderAttackOnHorizontally(target.GetColor(), positionNumber, positionMarker);
+}
+
+std::pair<uint8_t, Chess::ChessPosition> Chess::FindWhiteKing() {
+    for (int xAxis{}; xAxis < 8; xAxis++) {
+        for (int yAxis{}; yAxis < 8; yAxis++) {
+            Piece &current = ChessField[xAxis][yAxis];
+            if (current.GetPiece() == Piece::PieceFigure::KING &&
+                current.GetColor() == Piece::PieceColor::WHITE) {
+                return {xAxis, (ChessPosition)yAxis};
+            }
+        }
+    }
+    throw std::logic_error("No white king on the field");
+}
+
+Chess::SolutionCheck Chess::Solution(uint8_t xAxisPos, ChessPosition yAxisPos) {
+    int res = IsUnderAttack(yAxisPos, xAxisPos + 1);
+    if (res == Piece::PieceFigure::BISHOP) {
+        return CheckFromBishop;
+    } else if (res == Piece::PieceFigure::ROOK) {
+        return CheckFromRook;
+    }
+    return NoCheck;
 }
