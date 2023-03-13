@@ -1,3 +1,4 @@
+
 #include "Chess.h"
 
 Chess::Chess() {
@@ -46,7 +47,7 @@ Piece &Chess::GetPiece(ChessPosition positionMarker, uint8_t positionNumber) {
     return ChessField[positionNumber - 1][positionMarker];
 }
 
-int Chess::IsCheckOnDiagonally(int ColorKing, int xAxisPos, int yAxisPos) {
+int Chess::UnderAttackOnDiagonally(Piece::ChessColor ColorPiece, int xAxisPos, int yAxisPos) {
     int IncrementX = -1, IncrementY = -1;
     for (int i{}; i < 4; i++) {
         unsigned int xAxis = xAxisPos, yAxis = yAxisPos;
@@ -55,10 +56,20 @@ int Chess::IsCheckOnDiagonally(int ColorKing, int xAxisPos, int yAxisPos) {
             yAxis += IncrementY;
             Piece &current(ChessField[xAxis][yAxis]);
             if (!*current) continue;
-            if (*current % Piece::BISHOP == 0 && *current / Piece::BISHOP != ColorKing) {
-                return 7;
-            } else if (*current % Piece::QUEEN == 0 && *current / Piece::QUEEN != ColorKing) {
-                return 13;
+            if (current.GetPiece() == Piece::BISHOP && current.GetColor() != ColorPiece) {
+                return Piece::BISHOP;
+            } else if (current.GetPiece() == Piece::QUEEN && current.GetColor() != ColorPiece) {
+                return Piece::QUEEN;
+            } else if (fabs(xAxis - xAxisPos) == 1) {
+                if (current.GetPiece() == Piece::KING && current.GetColor() != ColorPiece) {
+                    return Piece::KING;
+                } else if (current.GetPiece() == Piece::PAWN && current.GetColor() != ColorPiece) {
+                    if (ColorPiece == Piece::ChessColor::WHITE && (yAxis - yAxisPos) == 1) {
+                        return Piece::PAWN;
+                    } else if (ColorPiece == Piece::ChessColor::BLACK && (yAxisPos - yAxis) == 1) {
+                        return Piece::PAWN;
+                    }
+                }
             }
             break;
         }
@@ -72,7 +83,7 @@ int Chess::IsCheckOnDiagonally(int ColorKing, int xAxisPos, int yAxisPos) {
     return 0;
 }
 
-int Chess::IsCheckOnHorizontally(int ColorKing, int xAxisPos, int yAxisPos) {
+int Chess::UnderAttackOnHorizontally(Piece::ChessColor ColorPiece, int xAxisPos, int yAxisPos) {
     int IncrementX = -1, IncrementY{};
     for (int i{}; i < 4; i++) {
         unsigned int xAxis = xAxisPos, yAxis = yAxisPos;
@@ -81,10 +92,14 @@ int Chess::IsCheckOnHorizontally(int ColorKing, int xAxisPos, int yAxisPos) {
             yAxis += IncrementY;
             Piece &current(ChessField[xAxis][yAxis]);
             if (!*current) continue;
-            if (*current % Piece::ROOK == 0 && *current / Piece::ROOK != ColorKing) {
-                return 5;
-            } else if (*current % Piece::QUEEN == 0 && *current / Piece::QUEEN != ColorKing) {
-                return 13;
+            if (current.GetPiece() == Piece::ROOK && current.GetColor() != ColorPiece) {
+                return Piece::ROOK;
+            } else if (current.GetPiece() == Piece::QUEEN && current.GetColor() != ColorPiece) {
+                return Piece::QUEEN;
+            } else if (fabs(xAxis - xAxisPos) == 1 || fabs(yAxis - yAxisPos) == 1) {
+                if (current.GetPiece() == Piece::KING && current.GetColor() != ColorPiece) {
+                    return Piece::KING;
+                }
             }
             break;
         }
@@ -99,17 +114,15 @@ int Chess::IsCheckOnHorizontally(int ColorKing, int xAxisPos, int yAxisPos) {
     return 0;
 }
 
-int Chess::IsCheck(ChessPosition positionMarker, uint8_t positionNumber) {
+int Chess::IsUnderAttack(ChessPosition positionMarker, uint8_t positionNumber) {
     int res{};
     Piece &target = GetPiece(positionMarker, positionNumber--);
-    if (*target % Piece::KING != 0 || !*target) {
+    if (!*target) {
         return res;
     }
-    int ColorKing = *target / Piece::KING;
-    if (res = IsCheckOnDiagonally(ColorKing, positionNumber, positionMarker)) {
+    res = UnderAttackOnDiagonally(target.GetColor(), positionNumber, positionMarker);
+    if (res) {
         return res;
     }
-    if (res = IsCheckOnHorizontally(ColorKing, positionNumber, positionMarker)) {
-        return res;
-    }
+    return UnderAttackOnHorizontally(target.GetColor(), positionNumber, positionMarker);
 }

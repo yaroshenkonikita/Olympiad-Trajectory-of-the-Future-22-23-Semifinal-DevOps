@@ -2,6 +2,7 @@
 #define OLYMPIAD_TRAJECTORY_OF_THE_FUTURE_22_23_SEMIFINAL_DEVOPS_CHESS_H_
 
 #include "Piece.h"
+#include <cmath>
 #include <stdexcept>
 
 class Chess {
@@ -13,12 +14,10 @@ public:
     Chess(Piece piece_for_fill);
     ~Chess() = default;
 
-
     Piece &GetPiece(ChessPosition positionMarker, uint8_t positionNumber);
-    int IsCheckOnDiagonally(int ColorKing, int xAxisPos, int yAxisPos);
-    int IsCheckOnHorizontally(int ColorKing, int xAxisPos, int yAxisPos);
-    int IsCheck(ChessPosition positionMarker, uint8_t positionNumber);
-
+    int UnderAttackOnDiagonally(Piece::ChessColor ColorKing, int xAxisPos, int yAxisPos);
+    int UnderAttackOnHorizontally(Piece::ChessColor ColorKing, int xAxisPos, int yAxisPos);
+    int IsUnderAttack(ChessPosition positionMarker, uint8_t positionNumber);
 
 private:
     Piece ChessField[ChessFieldSize][ChessFieldSize]{};
