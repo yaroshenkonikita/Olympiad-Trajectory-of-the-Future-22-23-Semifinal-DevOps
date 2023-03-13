@@ -1,0 +1,30 @@
+stages:
+  - build_test
+  - style_test
+  - functional_test
+
+test_build:
+  stage: build_test
+  tags:
+    - build
+  script:
+    - make all
+  artifacts:
+    paths:
+      - src/chess
+    expire_in: 30 days
+
+test_style:
+  stage: style_test
+  tags:
+    - style
+  script:
+    - clang-format -n -style=google -Werror src/*.cpp src/*.h
+
+test_functional:
+  stage: functional_test
+  tags:
+    - test
+  script:
+    - make test
+  needs: ["test_style", "test_build"]
