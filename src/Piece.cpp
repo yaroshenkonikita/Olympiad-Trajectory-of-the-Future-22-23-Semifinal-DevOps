@@ -26,3 +26,12 @@ Piece &Piece::operator=(std::pair<Piece::ChessPiece, Piece::ChessColor> &pair) n
     _piece = pair.first;
     _color = pair.second;
 }
+
+
+Piece::PieceFigure Piece::GetPiece() const noexcept {
+    return _piece;
+}
+
+Piece::ChessColor Piece::GetColor() const noexcept {
+    return _color;
+}

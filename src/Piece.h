@@ -31,6 +31,10 @@ public:
     Piece& operator=(Piece &&other) noexcept;
     Piece& operator=(std::pair<PieceFigure, ChessColor> &pair) noexcept;
 
+    PieceFigure GetPiece() const noexcept;
+
+    ChessColor GetColor() const noexcept;
+
 private:
     PieceFigure _piece{};
     ChessColor _color{};
