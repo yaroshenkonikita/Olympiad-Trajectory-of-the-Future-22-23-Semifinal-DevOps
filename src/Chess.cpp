@@ -1,9 +1,9 @@
 #include "Chess.h"
 
 Chess::Chess() {
-    for (int AxisNumber = 0; AxisNumber < 8; AxisNumber++) {
+    for (int AxisNumber{}; AxisNumber < 8; AxisNumber++) {
         if (AxisNumber == 2) AxisNumber += 4;
-        for (int AxisMarker = 0; AxisMarker < 8; AxisMarker++) {
+        for (int AxisMarker{}; AxisMarker < 8; AxisMarker++) {
             Piece::ChessColor color = Piece::NONE;
             if (AxisNumber > 5) {
                 color = Piece::BLACK;
@@ -48,7 +48,7 @@ Piece &Chess::GetPiece(ChessPosition positionMarker, uint8_t positionNumber) {
 
 int Chess::IsCheckOnDiagonally(int ColorKing, int xAxisPos, int yAxisPos) {
     int IncrementX = -1, IncrementY = -1;
-    for (int i = 0; i < 4; i++) {
+    for (int i{}; i < 4; i++) {
         unsigned int xAxis = xAxisPos, yAxis = yAxisPos;
         while (xAxis < 8 && yAxis < 8) {
             xAxis += IncrementX;
@@ -73,8 +73,8 @@ int Chess::IsCheckOnDiagonally(int ColorKing, int xAxisPos, int yAxisPos) {
 }
 
 int Chess::IsCheckOnHorizontally(int ColorKing, int xAxisPos, int yAxisPos) {
-    int IncrementX = -1, IncrementY = 0;
-    for (int i = 0; i < 4; i++) {
+    int IncrementX = -1, IncrementY{};
+    for (int i{}; i < 4; i++) {
         unsigned int xAxis = xAxisPos, yAxis = yAxisPos;
         while (xAxis < 8 && yAxis < 8) {
             xAxis += IncrementX;
@@ -112,7 +112,4 @@ int Chess::IsCheck(ChessPosition positionMarker, uint8_t positionNumber) {
     if (res = IsCheckOnHorizontally(ColorKing, positionNumber, positionMarker)) {
         return res;
     }
-
-
-
 }
