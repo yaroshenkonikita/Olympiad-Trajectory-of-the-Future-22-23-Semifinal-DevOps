@@ -40,11 +40,11 @@ Chess::Chess(Piece &piece_for_fill) {
     }
 }
 
-Piece &Chess::GetPiece(ChessPosition positionMarker, uint8_t positionNumber) {
-    if (positionNumber > 8 || !positionNumber) {
-        throw std::out_of_range("GetPiece: Out of range: Position number maybe from 1 to 8");
+Piece &Chess::GetPiece(uint8_t positionNumber, uint8_t positionMarker) {
+    if (positionNumber > 7 || positionMarker > 7) {
+        throw std::out_of_range("GetPiece: Out of range: Position piece maybe from 0 to 7");
     }
-    return ChessField[positionNumber - 1][positionMarker];
+    return ChessField[positionNumber][positionMarker];
 }
 
 int Chess::UnderAttackOnDiagonally(Piece::PieceColor ColorPiece, int xAxisPos, int yAxisPos) {
@@ -114,9 +114,9 @@ int Chess::UnderAttackOnHorizontally(Piece::PieceColor ColorPiece, int xAxisPos,
     return 0;
 }
 
-int Chess::IsUnderAttack(ChessPosition positionMarker, uint8_t positionNumber) {
+int Chess::IsUnderAttack(uint8_t positionNumber, uint8_t positionMarker) {
     int res{};
-    Piece &target = GetPiece(positionMarker, positionNumber--);
+    Piece &target = GetPiece(positionNumber, positionMarker);
     if (!*target) {
         return res;
     }
@@ -127,20 +127,20 @@ int Chess::IsUnderAttack(ChessPosition positionMarker, uint8_t positionNumber) {
     return UnderAttackOnHorizontally(target.GetColor(), positionNumber, positionMarker);
 }
 
-std::pair<uint8_t, Chess::ChessPosition> Chess::FindWhiteKing() {
+std::pair<uint8_t, uint8_t> Chess::FindWhiteKing() {
     for (int xAxis{}; xAxis < 8; xAxis++) {
         for (int yAxis{}; yAxis < 8; yAxis++) {
             Piece &current = ChessField[xAxis][yAxis];
             if (current.GetPiece() == Piece::PieceFigure::KING &&
                 current.GetColor() == Piece::PieceColor::WHITE) {
-                return {xAxis, (ChessPosition)yAxis};
+                return {xAxis, yAxis};
             }
         }
     }
     throw std::logic_error("No white king on the field");
 }
 
-Chess::SolutionCheck Chess::Solution(uint8_t xAxisPos, ChessPosition yAxisPos) {
+Chess::SolutionCheck Chess::Solution(uint8_t xAxisPos, uint8_t yAxisPos) {
     int res = IsUnderAttack(yAxisPos, xAxisPos + 1);
     if (res == Piece::PieceFigure::BISHOP) {
         return CheckFromBishop;

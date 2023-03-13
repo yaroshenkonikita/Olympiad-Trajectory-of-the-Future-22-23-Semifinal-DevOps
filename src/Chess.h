@@ -8,20 +8,20 @@
 class Chess {
 public:
     static constexpr uint8_t ChessFieldSize = 8;
-    typedef enum ChessFieldMarker { A, B, C, D, E, F, G, H } ChessPosition;
+    enum ChessFieldMarker { A, B, C, D, E, F, G, H };
 
     Chess();
     Chess(Piece &piece_for_fill);
     ~Chess() = default;
 
-    Piece &GetPiece(ChessPosition positionMarker, uint8_t positionNumber);
+    Piece &GetPiece(uint8_t positionNumber, uint8_t positionMarker);
     int UnderAttackOnDiagonally(Piece::PieceColor ColorKing, int xAxisPos, int yAxisPos);
     int UnderAttackOnHorizontally(Piece::PieceColor ColorKing, int xAxisPos, int yAxisPos);
-    int IsUnderAttack(ChessPosition positionMarker, uint8_t positionNumber);
+    int IsUnderAttack(uint8_t positionMarker, uint8_t positionNumber);
 
     typedef enum CheckWhiteKing { NoCheck, CheckFromBishop, CheckFromRook } SolutionCheck;
-    std::pair<uint8_t, ChessPosition> FindWhiteKing();
-    SolutionCheck Solution(uint8_t xAxisPos, ChessPosition yAxisPos);
+    std::pair<uint8_t, uint8_t> FindWhiteKing();
+    SolutionCheck Solution(uint8_t xAxisPos, uint8_t yAxisPos);
 
 
 private:
