@@ -8,7 +8,7 @@ test_build:
   tags:
     - build
   script:
-    - make chess.so
+    - make all
   artifacts:
     paths:
       - build/chess
