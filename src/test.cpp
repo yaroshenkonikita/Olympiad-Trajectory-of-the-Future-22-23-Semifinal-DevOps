@@ -33,10 +33,10 @@ int main(int argc, char **argv) {
 
         for (pqxx::result::const_iterator i = response.begin(), r_end = response.end(); i != r_end; ++i) {
             auto column = i->begin();
-            int piece = std::stoi((++column)->c_str()),
-                    color = std::stoi((++column)->c_str()),
-                    marker = std::stoi((++column)->c_str()),
-                    number = std::stoi((++column)->c_str());
+            int piece = std::atoi((++column)->c_str()),
+                    color = std::atoi((++column)->c_str()),
+                    marker = std::atoi((++column)->c_str()),
+                    number = std::atoi((++column)->c_str());
             std::cout << piece << " " << color << " " << marker << " " << number << std::endl;
         }
 
