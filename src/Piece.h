@@ -3,6 +3,7 @@
 
 #include <utility>
 #include <cstdint>
+#include <stdexcept>
 
 class Piece {
 public:
@@ -24,6 +25,9 @@ public:
     Piece(PieceFigure figure, PieceColor color) noexcept;
 
     ~Piece() = default;
+
+    static PieceFigure FromIntToPieceFigure(int x);
+    static PieceColor FromIntToPieceColor(int x);
 
     uint8_t operator*() noexcept;
 

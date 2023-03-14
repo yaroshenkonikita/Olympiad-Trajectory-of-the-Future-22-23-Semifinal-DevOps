@@ -36,3 +36,33 @@ Piece::PieceFigure Piece::GetPiece() const noexcept {
 Piece::PieceColor Piece::GetColor() const noexcept {
     return _color;
 }
+
+Piece::PieceFigure Piece::FromIntToPieceFigure(int x) {
+    switch (x) {
+        case 3:
+            return PAWN;
+        case 5:
+            return ROOK;
+        case 7:
+            return BISHOP;
+        case 11:
+            return KNIGHT;
+        case 13:
+            return QUEEN;
+        case 17:
+            return KING;
+        default:
+            throw std::invalid_argument("FromIntToPieceFigure: No Piece for value - x");
+    }
+}
+
+Piece::PieceColor Piece::FromIntToPieceColor(int x) {
+    switch (x) {
+        case 1:
+            return WHITE;
+        case 2:
+            return BLACK;
+        default:
+            throw std::invalid_argument("FromIntToPieceColor: No Color for value - x");
+    }
+}
