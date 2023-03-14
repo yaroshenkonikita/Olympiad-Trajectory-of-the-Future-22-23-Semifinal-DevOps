@@ -1,4 +1,3 @@
-
 #include "Piece.h"
 
 Piece::Piece(PieceFigure figure, PieceColor color) noexcept {
