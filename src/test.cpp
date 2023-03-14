@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
             auto column = i->begin();
             int piece = std::atoi((++column)->c_str()),
                     color = std::atoi((++column)->c_str()),
-                    marker = std::atoi((++column)->c_str()),
+                    marker = *((++column)->c_str()) - 'A',
                     number = std::atoi((++column)->c_str());
             std::cout << piece << " " << color << " " << marker << " " << number << std::endl;
         }
