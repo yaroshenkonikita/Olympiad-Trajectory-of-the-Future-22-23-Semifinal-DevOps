@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
                             "WHERE GAME_ID = " << i << " GROUP BY GAME_ID, 2, 3, 4, 5";
 
             pqxx::result response = worker.exec(string_query.str());
-            if (response.empty()) {
+            if (!response.size()) {
                 if (i == 1) {
                     std::cout << "No one test case..." << std::endl;
                     return EXIT_FAILURE;
