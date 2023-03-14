@@ -43,23 +43,17 @@ int main(int argc, char **argv) {
             std::cout << "Test " << i << " is start!" << std::endl;
 
             for (pqxx::result::iterator row_begin = response.begin(), row_end = response.end(); row_begin != row_end; ++row_begin) {
-                std::cout << "start parse row" << std::endl;
                 pqxx::row::iterator column_iter = row_begin->begin();
                 int piece = std::atoi((++column_iter)->c_str()),
                 color = std::atoi((++column_iter)->c_str()),
                 marker = *((++column_iter)->c_str()) - 'A',
                 number = *((++column_iter)->c_str()) - '1';
-                std::cout << "ok parser" << std::endl;
 
                 Piece figure(Piece::FromIntToPieceFigure(piece), Piece::FromIntToPieceColor(color));
-                std::cout << "ok create piece" << std::endl;
                 Piece &tmp = test.GetPiece(number, marker);
                 tmp = figure;
-                std::cout << "ok setter in piece" << std::endl;
             }
-            std::cout << "Solution is not ok" << std::endl;
             Chess::SolutionCheck answer = test.Solution();
-            std::cout << "Solution is ok" << std::endl;
 
             switch (answer) {
                 case Chess::NoCheck:

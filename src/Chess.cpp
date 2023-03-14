@@ -54,7 +54,7 @@ int Chess::UnderAttackOnDiagonally(Piece::PieceColor ColorPiece, int xAxisPos, i
         while (true) {
             xAxis += IncrementX;
             yAxis += IncrementY;
-            if (xAxis < 8 && yAxis < 8) break;
+            if (xAxis > 7 && yAxis > 7) break;
             Piece &current(ChessField[xAxis][yAxis]);
             if (!*current) continue;
             if (current.GetPiece() == Piece::BISHOP && current.GetColor() != ColorPiece) {
@@ -91,7 +91,7 @@ int Chess::UnderAttackOnHorizontally(Piece::PieceColor ColorPiece, int xAxisPos,
         while (true) {
             xAxis += IncrementX;
             yAxis += IncrementY;
-            if (xAxis < 8 && yAxis < 8) break;
+            if (xAxis > 7 && yAxis > 7) break;
             Piece &current(ChessField[xAxis][yAxis]);
             if (!*current) continue;
             if (current.GetPiece() == Piece::ROOK && current.GetColor() != ColorPiece) {
@@ -144,9 +144,7 @@ std::pair<uint8_t, uint8_t> Chess::FindWhiteKing() {
 
 Chess::SolutionCheck Chess::Solution() {
     std::pair<uint8_t, uint8_t> PositionKing = FindWhiteKing();
-    std::cout << "Find king is Done!" << std::endl;
     int res = IsUnderAttack(PositionKing.first, PositionKing.second);
-    std::cout << "attack king is Done!" << std::endl;
     if (res == Piece::PieceFigure::BISHOP) {
         return CheckFromBishop;
     } else if (res == Piece::PieceFigure::ROOK) {
