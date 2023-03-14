@@ -1,9 +1,8 @@
-#include <iostream>
+
 #include <pqxx/connection>
 #include <pqxx/transaction>
 #include <pqxx/pqxx>
-#include <string>
-#include <sstream>
+
 #include "Chess.h"
 
 void help()
