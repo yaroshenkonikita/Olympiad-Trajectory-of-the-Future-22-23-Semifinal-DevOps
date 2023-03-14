@@ -58,7 +58,10 @@ int main(int argc, char **argv) {
                 tmp = Figure;
                 std::cout << "ok setter in piece" << std::endl;
             }
-            switch (test.Solution()) {
+            Chess::SolutionCheck answer = test.Solution();
+            std::cout << "Solution is ok" << std::endl;
+
+            switch (answer) {
                 case Chess::NoCheck:
                     std::cout << "In Test " << i << "King haven't Check" << std::endl;
                     break;
@@ -67,7 +70,6 @@ int main(int argc, char **argv) {
                     break;
                 case Chess::CheckFromRook:
                     std::cout << "In Test " << i << "King have Check from Rook" << std::endl;
-                    break;
             }
             std::cout << "Test " << i << " is complete!" << std::endl;
         }
