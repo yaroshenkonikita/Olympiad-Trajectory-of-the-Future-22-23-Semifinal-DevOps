@@ -23,7 +23,7 @@ chess.so: clean $(HEADER_PIECE) $(HEADER_CHESS)
 	$(CXX) $(CXXFLAGS) -fPIC -c -o lib/piece.o src/Piece.cpp
 	$(CXX) $(CXXFLAGS) -fPIC -c -o lib/chess.o src/Chess.cpp
 	$(CXX) lib/*.o -shared -o lib/chess.so
-	sudo cp lib/chess.so /usr/lib
+	cp lib/chess.so /usr/lib
 	@echo "Shared library built"
 	@rm lib/*.o
 	@echo "Object files deleted"
