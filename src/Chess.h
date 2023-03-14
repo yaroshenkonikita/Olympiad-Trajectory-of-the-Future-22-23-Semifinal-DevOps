@@ -3,9 +3,6 @@
 
 #include "Piece.h"
 #include <cmath>
-#include <iostream>
-#include <string>
-#include <sstream>
 
 class Chess {
 public:
