@@ -44,9 +44,9 @@ int main(int argc, char **argv) {
             std::cout << "Test " << i << " is start!" << std::endl;
             std::cout << "ok parser" << std::endl;
 
-            for (auto iter_row = response.begin(), row_end = response.end(); iter_row != row_end; ++iter_row) {
+            for (auto j = response.begin(), row_end = response.end(); j != row_end; ++j) {
                 std::cout << "start parse row" << std::endl;
-                auto column_iter = iter_row->begin();
+                auto column_iter = j->begin();
                 int piece = std::atoi((++column_iter)->c_str()),
                 color = std::atoi((++column_iter)->c_str()),
                 marker = *((++column_iter)->c_str()) - 'A',
