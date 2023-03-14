@@ -44,13 +44,13 @@ int main(int argc, char **argv) {
             std::cout << "Test " << i << " is start!" << std::endl;
             std::cout << "ok parser" << std::endl;
 
-            for (pqxx::result::const_iterator iter_row = response.begin(), row_end = response.end(); iter_row != row_end; ++iter_row) {
+            for (auto iter_row = response.begin(), row_end = response.end(); iter_row != row_end; ++iter_row) {
                 std::cout << "start parse row" << std::endl;
-                auto column = iter_row->begin();
-                int piece = std::atoi((++column)->c_str()),
-                color = std::atoi((++column)->c_str()),
-                marker = *((++column)->c_str()) - 'A',
-                number = *((++column)->c_str()) - '1';
+                auto column_iter = iter_row->begin();
+                int piece = std::atoi((++column_iter)->c_str()),
+                color = std::atoi((++column_iter)->c_str()),
+                marker = *((++column_iter)->c_str()) - 'A',
+                number = *((++column_iter)->c_str()) - '1';
                 std::cout << "ok parser" << std::endl;
 
                 Piece Figure(Piece::FromIntToPieceFigure(piece), Piece::FromIntToPieceColor(color));
