@@ -32,10 +32,8 @@ int main(int argc, char **argv) {
             return EXIT_FAILURE;
         }
         for (pqxx::result::const_iterator i = response.begin(), r_end = response.end(); i != r_end; ++i) {
-            for (auto f = i->begin(), f_end = i->end(); f != f_end; ++f) {
-                std::cout << f->name() << " = '" << f->c_str() << "'" << std::endl;
-            }
-            std::cout << std::endl;
+            auto column = i->begin();
+            std::cout << (++column)->c_str() << (++column)->c_str() << (++column)->c_str() << (++column)->c_str() << std::endl;
         }
 
     }
