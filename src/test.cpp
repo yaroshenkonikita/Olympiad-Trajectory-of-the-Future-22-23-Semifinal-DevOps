@@ -42,9 +42,8 @@ int main(int argc, char **argv) {
                 return EXIT_SUCCESS;
             }
             std::cout << "Test " << i << " is start!" << std::endl;
-            std::cout << "ok parser" << std::endl;
 
-            for (auto j = response.begin(), row_end = response.end(); j != row_end; ++j) {
+            for (auto j = response.begin(), row_end = response.end(); j != row_end;) {
                 std::cout << "start parse row" << std::endl;
                 auto column_iter = j->begin();
                 int piece = std::atoi((++column_iter)->c_str()),
@@ -53,11 +52,12 @@ int main(int argc, char **argv) {
                 number = *((++column_iter)->c_str()) - '1';
                 std::cout << "ok parser" << std::endl;
 
-                Piece Figure(Piece::FromIntToPieceFigure(piece), Piece::FromIntToPieceColor(color));
+                Piece figure(Piece::FromIntToPieceFigure(piece), Piece::FromIntToPieceColor(color));
                 std::cout << "ok create piece" << std::endl;
                 Piece &tmp = test.GetPiece(number, marker);
-                tmp = Figure;
+                tmp = figure;
                 std::cout << "ok setter in piece" << std::endl;
+                ++j;
             }
             Chess::SolutionCheck answer = test.Solution();
             std::cout << "Solution is ok" << std::endl;
