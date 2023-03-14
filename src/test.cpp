@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
         pqxx::work worker(connectionObject, "Test");
 
         for (int i = 1;; ++i) {
-            
+
             Piece for_fill{Piece::VOID, Piece::NONE};
             Chess test(for_fill);
 
@@ -42,6 +42,7 @@ int main(int argc, char **argv) {
                 return EXIT_SUCCESS;
             }
             std::cout << "Test " << i << " is start!" << std::endl;
+            std::cout << "ok parser" << std::endl;
 
             for (pqxx::result::const_iterator iter_row = response.begin(), r_end = response.end(); iter_row != r_end; ++iter_row) {
                 auto column = iter_row->begin();
@@ -49,9 +50,13 @@ int main(int argc, char **argv) {
                 color = std::atoi((++column)->c_str()),
                 marker = *((++column)->c_str()) - 'A',
                 number = *((++column)->c_str()) - '1';
+                std::cout << "ok parser" << std::endl;
 
                 Piece Figure(Piece::FromIntToPieceFigure(piece), Piece::FromIntToPieceColor(color));
-                test.GetPiece(number, marker) = Figure;
+                std::cout << "ok create piece" << std::endl;
+                Piece &tmp = test.GetPiece(number, marker);
+                tmp = Figure;
+                std::cout << "ok setter in piece" << std::endl;
             }
             switch (test.Solution()) {
                 case Chess::NoCheck:
