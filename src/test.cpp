@@ -21,8 +21,12 @@ int main(int argc, char **argv) {
         pqxx::connection connectionObject(conn_string.str());
 
         pqxx::work worker(connectionObject, "Test");
+//        int i = 1;
+        std::ostringstream string_query("");
+        string_query << "SELECT MAX(MOVE_ID), PIECE_ID, PIECE_COLOR, XAXISMARKER, YAXISNUMBER FROM TEST_VALUES" <<
+                        "WHERE GAME_ID = " << 1 << " GROUP BY 2, 3, 4, 5";
 
-        pqxx::result response = worker.exec("SELECT PIECE_ID, PIECE_COLOR, XAXISMARKER, YAXISNUMBER FROM TEST_VALUES WHERE GAME_ID = 1 AND MOVE_ID = 20");
+        pqxx::result response = worker.exec(string_query.str());
         if (!response.size()) {
             std::cout << "Empty result set." << std::endl;
             return EXIT_FAILURE;

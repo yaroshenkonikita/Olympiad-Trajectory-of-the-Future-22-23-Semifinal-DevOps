@@ -8,10 +8,10 @@ test_build:
   tags:
     - build
   script:
-    - make all
+    - make chess.so
   artifacts:
     paths:
-      - src/chess
+      - build/chess
     expire_in: 30 days
 
 test_style:
