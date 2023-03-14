@@ -22,7 +22,8 @@ int main(int argc, char **argv) {
         pqxx::connection connectionObject(conn_string.str());
         pqxx::work worker(connectionObject, "Test");
 
-        for (int i = 0;; ++i) {
+        for (int i = 0;; ) {
+            ++i;
             Piece for_fill{Piece::VOID, Piece::NONE};
             Chess test(for_fill);
 
@@ -30,7 +31,7 @@ int main(int argc, char **argv) {
             string_query << "SELECT MAX(MOVE_ID), PIECE_ID, PIECE_COLOR, XAXISMARKER, YAXISNUMBER FROM TEST_VALUES "
                             "WHERE GAME_ID = " << i << " GROUP BY GAME_ID, 2, 3, 4, 5";
             std::cout << string_query.str() << std::endl;
-            
+
             pqxx::result response = worker.exec(string_query.str());
             if (!response.size()) {
                 if (i == 1) {
