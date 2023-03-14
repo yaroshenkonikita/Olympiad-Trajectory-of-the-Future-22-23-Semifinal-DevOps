@@ -43,9 +43,9 @@ int main(int argc, char **argv) {
             }
             std::cout << "Test " << i << " is start!" << std::endl;
 
-            for (auto j = response.begin(), row_end = response.end(); j != row_end;) {
+            for (pqxx::result::iterator row_begin = response.begin(), row_end = response.end(); row_begin != row_end; ++row_begin) {
                 std::cout << "start parse row" << std::endl;
-                auto column_iter = j->begin();
+                pqxx::row::iterator column_iter = row_begin->begin();
                 int piece = std::atoi((++column_iter)->c_str()),
                 color = std::atoi((++column_iter)->c_str()),
                 marker = *((++column_iter)->c_str()) - 'A',
@@ -57,8 +57,8 @@ int main(int argc, char **argv) {
                 Piece &tmp = test.GetPiece(number, marker);
                 tmp = figure;
                 std::cout << "ok setter in piece" << std::endl;
-                ++j;
             }
+            std::cout << "Solution is not ok" << std::endl;
             Chess::SolutionCheck answer = test.Solution();
             std::cout << "Solution is ok" << std::endl;
 
