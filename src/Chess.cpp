@@ -51,9 +51,10 @@ int Chess::UnderAttackOnDiagonally(Piece::PieceColor ColorPiece, int xAxisPos, i
     int IncrementX = -1, IncrementY = -1;
     for (int i{}; i < 4; i++) {
         unsigned int xAxis = xAxisPos, yAxis = yAxisPos;
-        while (xAxis < 8 && yAxis < 8) {
+        while (true) {
             xAxis += IncrementX;
             yAxis += IncrementY;
+            if (xAxis < 8 && yAxis < 8) break;
             Piece &current(ChessField[xAxis][yAxis]);
             if (!*current) continue;
             if (current.GetPiece() == Piece::BISHOP && current.GetColor() != ColorPiece) {
