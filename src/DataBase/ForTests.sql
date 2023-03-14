@@ -29,8 +29,7 @@ CREATE TABLE TEST_VALUES (
     CONSTRAINT FK_CHECKS_PIECE_COLOR FOREIGN KEY (PIECE_COLOR) REFERENCES PIECES_COLOR (ID)
 );
 
-INSERT INTO TEST_VALUES VALUES (1, 20, 17, 1, 'F', '2'),
-                               (1, 20, 7, 2, 'B', '6'); -- Есть шах от слона
+INSERT INTO TEST_VALUES VALUES (1, 20, 17, 1, 'F', '2'), (1, 20, 7, 2, 'B', '6');                -- Есть шах от слона
 
 INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 32, 17, 1, 'C', '2'),
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 32, 5, 2, 'D', '4'); -- Нет шаха от ладьи
@@ -89,3 +88,7 @@ INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 60, 
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 60, 5, 2, 'E', '1'), -- За пешками находятся ладьи и слоны
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 60, 5, 2, 'C', '3'), -- Которые направлены атакой в сторону короля
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 60, 5, 2, 'G', '3'); -- Шаха нет
+
+INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 27, 17, 1, 'D', '5'), -- Шах от слона на 27 ходу,
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 26, 3, 2, 'C', '6'),  -- пешка на 26 была, но она в счет не должна идти.
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 27, 7, 2, 'B', '7');  -- Итого шах от слона
