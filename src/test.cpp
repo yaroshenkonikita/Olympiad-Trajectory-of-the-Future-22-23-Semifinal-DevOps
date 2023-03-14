@@ -22,8 +22,8 @@ int main(int argc, char **argv) {
         pqxx::connection connectionObject(conn_string.str());
         pqxx::work worker(connectionObject, "Test");
 
-        for (int i = 0;; ) {
-            ++i;
+        for (int i = 1;; ++i) {
+            
             Piece for_fill{Piece::VOID, Piece::NONE};
             Chess test(for_fill);
 
