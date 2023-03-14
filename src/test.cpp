@@ -44,7 +44,8 @@ int main(int argc, char **argv) {
             std::cout << "Test " << i << " is start!" << std::endl;
             std::cout << "ok parser" << std::endl;
 
-            for (pqxx::result::const_iterator iter_row = response.begin(), r_end = response.end(); iter_row != r_end; ++iter_row) {
+            for (pqxx::result::const_iterator iter_row = response.begin(), row_end = response.end(); iter_row != row_end; ++iter_row) {
+                std::cout << "start parse row" << std::endl;
                 auto column = iter_row->begin();
                 int piece = std::atoi((++column)->c_str()),
                 color = std::atoi((++column)->c_str()),
