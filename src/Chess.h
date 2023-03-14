@@ -3,7 +3,6 @@
 
 #include "Piece.h"
 #include <cmath>
-#include <stdexcept>
 
 class Chess {
 public:
@@ -21,7 +20,7 @@ public:
 
     typedef enum CheckWhiteKing { NoCheck, CheckFromBishop, CheckFromRook } SolutionCheck;
     std::pair<uint8_t, uint8_t> FindWhiteKing();
-    SolutionCheck Solution(uint8_t xAxisPos, uint8_t yAxisPos);
+    SolutionCheck Solution();
 
 
 private:

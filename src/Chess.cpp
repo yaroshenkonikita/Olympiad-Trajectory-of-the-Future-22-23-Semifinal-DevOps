@@ -140,8 +140,9 @@ std::pair<uint8_t, uint8_t> Chess::FindWhiteKing() {
     throw std::logic_error("No white king on the field");
 }
 
-Chess::SolutionCheck Chess::Solution(uint8_t xAxisPos, uint8_t yAxisPos) {
-    int res = IsUnderAttack(yAxisPos, xAxisPos + 1);
+Chess::SolutionCheck Chess::Solution() {
+    std::pair<uint8_t, uint8_t> PositionKing = FindWhiteKing();
+    int res = IsUnderAttack(PositionKing.first, PositionKing.second);
     if (res == Piece::PieceFigure::BISHOP) {
         return CheckFromBishop;
     } else if (res == Piece::PieceFigure::ROOK) {
