@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 
         pqxx::work worker(connectionObject, "Test");
 
-        pqxx::result response = worker.exec("SELECT * FROM TEST_VALUES");
+        pqxx::result response = worker.exec("SELECT PIECE_ID, PIECE_COLOR, XAXISMARKER, YAXISMARKER FROM TEST_VALUES WHERE GAME_ID = 1 AND MOVE_ID = 20");
         if (!response.size()) {
             std::cout << "Empty result set." << std::endl;
             return EXIT_FAILURE;
