@@ -30,10 +30,14 @@ int main(int argc, char **argv) {
             std::cout << "Empty result set." << std::endl;
             return EXIT_FAILURE;
         }
-        pqxx::result::const_iterator i = response.begin()
+
         for (pqxx::result::const_iterator i = response.begin(), r_end = response.end(); i != r_end; ++i) {
             auto column = i->begin();
-            std::cout << (++column)->c_str() << " " << (++column)->c_str() << " " << (++column)->c_str() << " " << (++column)->c_str() << std::endl;
+            std::string piece = (++column)->c_str(),
+            color = (++column)->c_str(),
+            marker = (++column)->c_str(),
+            number = (++column)->c_str();
+            std::cout << piece << " " << color << " " << marker << " " << number << std::endl;
         }
 
     }
