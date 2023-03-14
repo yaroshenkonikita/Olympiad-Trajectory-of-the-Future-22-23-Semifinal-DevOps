@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
 
             std::ostringstream string_query("");
             string_query << "SELECT MAX(MOVE_ID), PIECE_ID, PIECE_COLOR, XAXISMARKER, YAXISNUMBER FROM TEST_VALUES "
-                            "WHERE GAME_ID = " << i << " GROUP BY GAME_ID, 2, 3, 4, 5";
+                            "WHERE GAME_ID = " << (i + '0') << " GROUP BY GAME_ID, 2, 3, 4, 5";
 
             pqxx::result response = worker.exec(string_query.str());
             if (!response.size()) {
