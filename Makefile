@@ -8,7 +8,7 @@ SOURCES_ALL = $(find src/ -maxdepth 1 -name "*.cpp" 2> /dev/null)
 HEADER_PIECE = src/Piece.h
 HEADER_CHESS = src/Chess.h
 
-all:
+all: test
 
 test: chess.so
 	@mkdir -p build
