@@ -3,7 +3,7 @@
 #include <pqxx/pqxx>
 #include <iostream>
 
-#include "Chess.h"
+#include "../Chess.h"
 
 int main() {
     try {
