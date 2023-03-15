@@ -11,7 +11,7 @@ all: test
 test: chess.so
 	@echo "Start build test cases with shared library..."
 	@mkdir -p build
-	$(CXX) -Llib/ $(CXX_FLAGS) src/Tests/googletests.cpp -o build/findCheck -lchess $(PQXX_FLAGS) -lgtest -lgtest_main -lm
+	$(CXX) -Llib/ $(CXX_FLAGS) src/Tests/googletests.cpp -o build/findCheck -lchess $(PQXX_FLAGS) -lgtest -lgtest_main -lpthread -lm
 	@echo "Test cases is built"
 	@echo "Start test cases"
 	./build/findCheck
