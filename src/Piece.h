@@ -34,6 +34,8 @@ public:
     Piece& operator=(Piece &other) noexcept;
     Piece& operator=(Piece &&other) noexcept;
     Piece& operator=(std::pair<PieceFigure, PieceColor> &pair) noexcept;
+    bool operator==(Piece &other) noexcept;
+    bool operator!=(Piece &other) noexcept;
 
     PieceFigure GetPiece() const noexcept;
 

@@ -65,3 +65,11 @@ Piece::PieceColor Piece::FromIntToPieceColor(int x) {
             throw std::invalid_argument("FromIntToPieceColor: No Color for value - x");
     }
 }
+
+bool Piece::operator==(Piece &other) noexcept {
+    return _color == other._color && _piece == other._piece;
+}
+
+bool Piece::operator!=(Piece &other) noexcept {
+    return _color != other._color || _piece != other._piece;
+}
