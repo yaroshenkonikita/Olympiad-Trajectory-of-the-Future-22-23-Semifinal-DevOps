@@ -12,7 +12,7 @@ test_build:
     - make chess.so
   artifacts:
     paths:
-      - build/chess
+      - lib/libchess.so
     expire_in: 30 days
 
 test_style:
@@ -36,4 +36,8 @@ test_functional:
     - test
   script:
     - make test
+  artifacts:
+    paths:
+      - build/chess
+    expire_in: 30 days
   needs: ["build_database"]
