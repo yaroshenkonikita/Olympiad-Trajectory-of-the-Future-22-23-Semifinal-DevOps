@@ -2,9 +2,9 @@
 
 CXX = g++
 CXX_FLAGS = -Wall -Werror -Wextra -std=c++17
-PQXX_FLAGS = $(pkg-config --libs --cflags libpqxx)
+PQXX_FLAGS = $(shell pkg-config --libs --cflags libpqxx)
 PWD = $(shell pwd)
-SOURCES_ALL = $(find src/ -maxdepth 1 -name "*.cpp" 2> /dev/null)
+#SOURCES_ALL = $(shell find src/ -maxdepth 1 -name "*.cpp" 2> /dev/null)
 HEADER_PIECE = src/Piece.h
 HEADER_CHESS = src/Chess.h
 
@@ -13,8 +13,7 @@ all: test
 test: chess.so
 	@mkdir -p build
 	$(CXX) -c src/Tests/test.cpp -o lib/test.o
-	$(CXX) $(CXX_FLAGS) $(PQXX_FLAGS) lib/test.o src/*.h -o build/chess -Llib/ -lchess
-	export LD_LIBRARY_PATH=$(PWD)/lib/:$LD_LIBRARY_PATH
+	$(CXX) $(CXX_FLAGS) lib/test.o src/*.h -o build/chess -Llib/ -lchess $(PQXX_FLAGS)
 	./build/chess
 
 chess.so: clean $(HEADER_PIECE) $(HEADER_CHESS)
@@ -22,7 +21,8 @@ chess.so: clean $(HEADER_PIECE) $(HEADER_CHESS)
 	@mkdir -p lib
 	$(CXX) $(CXXFLAGS) -fPIC -c -o lib/piece.o src/Piece.cpp
 	$(CXX) $(CXXFLAGS) -fPIC -c -o lib/chess.o src/Chess.cpp
-	$(CXX) lib/*.o -shared -o libchess.so
+	$(CXX) lib/*.o -shared -o lib/libchess.so
+	cp lib/libchess.so /usr/lib
 	@echo "Shared library built"
 	@rm lib/*.o
 	@echo "Object files deleted"
