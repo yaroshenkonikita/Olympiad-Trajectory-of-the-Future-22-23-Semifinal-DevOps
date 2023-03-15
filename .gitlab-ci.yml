@@ -20,7 +20,7 @@ test_style:
   tags:
     - style
   script:
-    - clang-format -n -style=google -Werror src/*.cpp src/*.h
+    - clang-format -n -style=google -Werror src/*.cpp src/*.h src/Tests/*.cpp
 
 build_database:
   stage: rebuild_database
