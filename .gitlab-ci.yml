@@ -1,6 +1,7 @@
 stages:
   - build_test
   - style_test
+  - rebuild_database
   - functional_test
 
 test_build:
@@ -8,7 +9,7 @@ test_build:
   tags:
     - build
   script:
-    - make all
+    - make chess.so
   artifacts:
     paths:
       - build/chess
@@ -21,10 +22,18 @@ test_style:
   script:
     - clang-format -n -style=google -Werror src/*.cpp src/*.h
 
+build_database:
+  stage: rebuild_database
+  tags:
+    - build
+  script:
+    - psql -f src/DataBase/ForTests.sql -d chess
+  needs: ["test_style", "test_build"]
+
 test_functional:
   stage: functional_test
   tags:
     - test
   script:
     - make test
-  needs: ["test_style", "test_build"]
+  needs: ["build_database"]
