@@ -54,7 +54,6 @@ int Chess::UnderAttackOnDiagonally(Piece::PieceColor ColorPiece, int xAxisPos, i
             xAxis += IncrementX;
             yAxis += IncrementY;
             if (xAxis > 7 || yAxis > 7) break;
-//            std::cout << xAxis << " " << yAxis << std::endl;
             Piece &current(ChessField[xAxis][yAxis]);
             if (!*current) continue;
             if (current.GetPiece() == Piece::BISHOP && current.GetColor() != ColorPiece) {
@@ -92,7 +91,6 @@ int Chess::UnderAttackOnHorizontally(Piece::PieceColor ColorPiece, int xAxisPos,
             xAxis += IncrementX;
             yAxis += IncrementY;
             if (xAxis > 7 || yAxis > 7) break;
-//            std::cout << xAxis << " " << yAxis << std::endl;
             Piece &current(ChessField[xAxis][yAxis]);
             if (!*current) continue;
             if (current.GetPiece() == Piece::ROOK && current.GetColor() != ColorPiece) {
