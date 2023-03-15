@@ -13,7 +13,6 @@ test: chess.so
 	@mkdir -p build
 	$(CXX) -Llib/ $(CXX_FLAGS) src/Tests/googletests.cpp -o build/findCheck -lchess $(PQXX_FLAGS) -lgtest -lgtest_main -lm
 	@echo "Test cases is built"
-	@rm lib/test.o
 	@echo "Start test cases"
 	./build/findCheck
 	@echo "Tests is Complete!"

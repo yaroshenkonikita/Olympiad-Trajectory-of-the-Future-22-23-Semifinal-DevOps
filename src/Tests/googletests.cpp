@@ -64,9 +64,9 @@ TEST(Chess, default_constructor_and_getter) {
     bishop_white(Piece::PieceFigure::BISHOP, Piece::PieceColor::WHITE),
     knight_black(Piece::PieceFigure::KNIGHT, Piece::PieceColor::BLACK),
     king_white(Piece::PieceFigure::KING, Piece::PieceColor::WHITE);
-    EXPECT_TRUE(x.GetPiece(1, 4) == king_white);
-    EXPECT_TRUE(x.GetPiece(1, 2) == bishop_white);
-    EXPECT_TRUE(x.GetPiece(1, 5) == bishop_white);
+    EXPECT_TRUE(x.GetPiece(0, 4) == king_white);
+    EXPECT_TRUE(x.GetPiece(0, 2) == bishop_white);
+    EXPECT_TRUE(x.GetPiece(0, 5) == bishop_white);
     EXPECT_TRUE(x.GetPiece(7, 1) == knight_black);
     EXPECT_TRUE(x.GetPiece(7, 6) == knight_black);
     EXPECT_TRUE(x.GetPiece(7, 4) == king_black);

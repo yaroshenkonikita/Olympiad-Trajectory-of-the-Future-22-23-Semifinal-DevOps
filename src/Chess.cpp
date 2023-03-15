@@ -13,7 +13,7 @@ Chess::Chess() {
             Piece::ChessPiece piece = Piece::VOID;
             if (AxisNumber == 1 || AxisNumber == 6) {
                 piece = Piece::PAWN;
-            } else if (AxisNumber == 0 || AxisMarker == 7) {
+            } else if (AxisNumber == 0 || AxisNumber == 7) {
                 if (AxisMarker == A || AxisMarker == H) {
                     piece = Piece::ROOK;
                 } else if (AxisMarker == B || AxisMarker == G) {
