@@ -206,12 +206,13 @@ TEST(Solution, mini_test_solution) {
 }
 
 TEST(Solution, functional_tests_with_pgsql) {
+    int i{};
     try {
         std::string conn_string = "host=localhost dbname=chess user=postgres password=1";
         pqxx::connection connectionObject(conn_string);
         pqxx::work worker(connectionObject, "Functional Test");
 
-        for (int i = 1;; ++i) {
+        for (i = 1;; ++i) {
             Piece for_fill{Piece::VOID, Piece::NONE};
             Chess test(for_fill);
 
@@ -223,12 +224,11 @@ TEST(Solution, functional_tests_with_pgsql) {
             if (!response.size()) {
                 if (i == 1) {
                     std::cout << "No one test case..." << std::endl;
-                    exit(EXIT_FAILURE);
+                    break;
                 }
                 std::cout << "Test Cases is Done!" << std::endl;
                 std::cout << "Check result from test cases!" << std::endl;
-
-                exit(EXIT_SUCCESS);
+                break;
             }
             std::cout << "Test " << i << " is start!" << std::endl;
 
@@ -258,6 +258,11 @@ TEST(Solution, functional_tests_with_pgsql) {
     } catch (std::exception const &e) {
         std::cerr << e.what() << std::endl;
     }
-    exit(EXIT_FAILURE);
+    if (i > 1) {
+        
+    } else {
+        throw std::logic_error("Test cases SQL is Failure");
+    }
+
 }
 
