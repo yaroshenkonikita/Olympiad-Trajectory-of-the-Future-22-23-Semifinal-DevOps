@@ -1,5 +1,5 @@
-//#include <pqxx/connection>
-//#include <pqxx/transaction>
+#include <pqxx/connection>
+#include <pqxx/transaction>
 #include <pqxx/pqxx>
 #include <iostream>
 

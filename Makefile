@@ -13,7 +13,7 @@ all: test
 test: chess.so
 	@mkdir -p build
 	$(CXX) -c src/Tests/test.cpp -o lib/test.o
-	$(CXX) $(CXX_FLAGS) $(PQXX_FLAGS) lib/test.o -o build/chess -L./lib/ -lchess
+	$(CXX) $(CXX_FLAGS) $(PQXX_FLAGS) lib/test.o src/*.h -o build/chess -Llib/ -lchess
 	export LD_LIBRARY_PATH=$(PWD)/lib/:$LD_LIBRARY_PATH
 	./build/chess
 
@@ -22,8 +22,7 @@ chess.so: clean $(HEADER_PIECE) $(HEADER_CHESS)
 	@mkdir -p lib
 	$(CXX) $(CXXFLAGS) -fPIC -c -o lib/piece.o src/Piece.cpp
 	$(CXX) $(CXXFLAGS) -fPIC -c -o lib/chess.o src/Chess.cpp
-	$(CXX) lib/*.o -shared -o lib/chess.so
-	cp lib/chess.so /usr/lib
+	$(CXX) lib/*.o -shared -o libchess.so
 	@echo "Shared library built"
 	@rm lib/*.o
 	@echo "Object files deleted"
