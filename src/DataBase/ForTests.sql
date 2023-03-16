@@ -121,3 +121,7 @@ INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 27, 
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 27, 7, 2, 'B', '7');  -- Итого шах от слона
 
 INSERT INTO RESULT_VALUES(ANSWER) VALUES (1), (0), (2), (2), (2), (2), (1), (1), (1), (1), (0), (0), (0), (0), (0), (1), (0), (0), (0), (1);
+
+-- No Check - 0
+-- Check From Bishop - 1
+-- Check From Rook - 2

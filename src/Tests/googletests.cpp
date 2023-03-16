@@ -261,7 +261,6 @@ TEST(Solution, functional_tests_with_pgsql) {
       std::ostringstream answer_query("");
       answer_query << "SELECT ANSWER FROM RESULT_VALUES WHERE ID = " << i;
       pqxx::result answer_check = worker.exec(answer_query.str());
-      EXPECT_EQ(std::atoi(answer_check[0][0].c_str()), answer);
       switch (answer) {
         case Chess::NoCheck:
           std::cout << "In Test " << i << " King haven't Check" << std::endl;
@@ -274,6 +273,7 @@ TEST(Solution, functional_tests_with_pgsql) {
           std::cout << "In Test " << i << " King have Check from Rook"
                     << std::endl;
       }
+      EXPECT_EQ(std::atoi(answer_check[0][0].c_str()), answer);
       std::cout << "Test " << i << " is complete!" << std::endl << std::endl;
     }
   } catch (std::exception const &e) {
