@@ -38,6 +38,7 @@ test_functional:
     - test
   script:
     - export DEBUG=$DEBUG
+    - echo "'$DEBUG'"
     - make test
     - export DEBUG=0
   artifacts:
