@@ -263,18 +263,18 @@ TEST(Solution, functional_tests_with_pgsql) {
       answer_query << "SELECT ANSWER FROM RESULT_VALUES WHERE ID = " << i;
       pqxx::result answer_check = worker.exec(answer_query.str());
       EXPECT_EQ(std::atoi(answer_check[0].c_str()), answer);
-//      switch (answer) {
-//        case Chess::NoCheck:
-//          std::cout << "In Test " << i << " King haven't Check" << std::endl;
-//          break;
-//        case Chess::CheckFromBishop:
-//          std::cout << "In Test " << i << " King have Check from Bishop"
-//                    << std::endl;
-//          break;
-//        case Chess::CheckFromRook:
-//          std::cout << "In Test " << i << " King have Check from Rook"
-//                    << std::endl;
-//      }
+      //      switch (answer) {
+      //        case Chess::NoCheck:
+      //          std::cout << "In Test " << i << " King haven't Check" <<
+      //          std::endl; break;
+      //        case Chess::CheckFromBishop:
+      //          std::cout << "In Test " << i << " King have Check from Bishop"
+      //                    << std::endl;
+      //          break;
+      //        case Chess::CheckFromRook:
+      //          std::cout << "In Test " << i << " King have Check from Rook"
+      //                    << std::endl;
+      //      }
       std::cout << "Test " << i << " is complete!" << std::endl << std::endl;
     }
   } catch (std::exception const &e) {
