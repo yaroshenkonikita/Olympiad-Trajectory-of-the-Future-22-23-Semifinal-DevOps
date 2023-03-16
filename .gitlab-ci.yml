@@ -37,10 +37,7 @@ test_functional:
   tags:
     - test
   script:
-    - export DEBUG=$DEBUG
-    - echo "'$DEBUG'"
-    - make test
-    - export DEBUG=0
+    - make DEBUG=$DEBUG test
   artifacts:
     paths:
       - build/chess
