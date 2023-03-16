@@ -27,6 +27,8 @@ build_database:
   tags:
     - build
   script:
+    - dropdb --if-exists chess
+    - createdb chess
     - psql -f src/DataBase/ForTests.sql -d chess
   needs: ["test_style", "test_build"]
 
