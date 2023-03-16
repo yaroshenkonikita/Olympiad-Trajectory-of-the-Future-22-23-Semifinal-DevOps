@@ -8,7 +8,6 @@ HEADER_PIECE = src/Piece.h
 HEADER_CHESS = src/Chess.h
 ifeq (DEBUG, 1)
 	DEBUGFLAG = -DOUTPUT
-	echo "flag is work"
 endif
 
 all: test dvi

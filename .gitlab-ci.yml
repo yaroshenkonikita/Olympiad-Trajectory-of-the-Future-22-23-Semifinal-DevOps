@@ -37,8 +37,9 @@ test_functional:
   tags:
     - test
   script:
-    - DEBUG=$DEBUG
+    - export DEBUG=$DEBUG
     - make test
+    - export DEBUG=0
   artifacts:
     paths:
       - build/chess
