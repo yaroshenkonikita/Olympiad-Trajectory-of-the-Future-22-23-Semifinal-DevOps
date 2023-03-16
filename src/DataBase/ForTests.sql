@@ -120,5 +120,4 @@ INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 27, 
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 26, 3, 2, 'C', '6'),  -- пешка на 26 была, но она в счет не должна идти.
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 27, 7, 2, 'B', '7');  -- Итого шах от слона
 
-INSERT INTO RESULT_VALUES(ANSWER) VALUES (7), (0), (5), (5), (5), (5), (7), (7), (7), (7), (0), (0), (0), (0), (0), (7), (0), (0), (0), (7);
-
+INSERT INTO RESULT_VALUES(ANSWER) VALUES (1), (0), (2), (2), (2), (2), (1), (1), (1), (1), (0), (0), (0), (0), (0), (1), (0), (0), (0), (1);
