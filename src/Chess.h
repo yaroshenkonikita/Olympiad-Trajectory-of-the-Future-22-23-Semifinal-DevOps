@@ -9,6 +9,7 @@ class Chess {
  public:
   /**
    * @brief Construct a new Chess object
+   * @details field is default chess table
    *
    */
   Chess();

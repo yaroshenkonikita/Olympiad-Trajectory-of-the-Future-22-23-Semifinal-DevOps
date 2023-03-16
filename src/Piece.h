@@ -71,11 +71,41 @@ class Piece {
    * @return uint8_t return mul of private fields piece and color
    */
   uint8_t operator*() noexcept;
-
+  /**
+   * @brief Operator copy
+   *
+   * @param other piece
+   * @return this object
+   */
   Piece &operator=(Piece &other) noexcept;
+  /**
+   * @brief Operator move
+   * @details Data of the other pawn is reset
+   *
+   * @param other piece
+   * @return this object
+   */
   Piece &operator=(Piece &&other) noexcept;
+  /**
+   * @brief Operator replace from pair
+   *
+   * @param other piece
+   * @return this object
+   */
   Piece &operator=(std::pair<PieceFigure, PieceColor> &pair) noexcept;
+  /**
+   * @brief Operator equal
+   *
+   * @param other piece
+   * @return bool of comparison
+   */
   bool operator==(Piece &other) noexcept;
+  /**
+   * @brief Operator not equal
+   *
+   * @param other piece
+   * @return bool of comparison
+   */
   bool operator!=(Piece &other) noexcept;
 
   /**
