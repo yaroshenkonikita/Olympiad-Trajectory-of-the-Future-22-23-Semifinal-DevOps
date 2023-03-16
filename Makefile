@@ -12,7 +12,8 @@ all: test dvi
 test: chess.so
 	@echo "Start build test cases with shared library..."
 	@mkdir -p build
-	$(CXX) -Llib/ $(CXX_FLAGS) -DOUTPUT src/Tests/googletests.cpp -o build/findCheck -lchess $(PQXX_FLAGS) -lgtest -lgtest_main -lpthread -lm
+	$(CXX) $(CXX_FLAGS) -c -o build/solution.o Solution.cpp
+	$(CXX) -Llib/ $(CXX_FLAGS) -DOUTPUT src/Tests/googletests.cpp build/solution.o -o build/findCheck -lchess $(PQXX_FLAGS) -lgtest -lgtest_main -lpthread -lm
 	@echo "Test cases is built"
 	@echo "Start test cases"
 	./build/findCheck
