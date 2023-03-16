@@ -138,8 +138,8 @@ Chess::SolutionCheck Chess::Solution() {
 
 std::ostream &operator<<(std::ostream &os, const Chess &field) {
   for (auto &field_row : field.ChessField) {
-    os << '|';
     for (auto &piece : field_row) {
+      os << res << '|';
       char res = piece.GetPiece();
       if (res == Piece::VOID) {
         res = ' ';
@@ -159,9 +159,8 @@ std::ostream &operator<<(std::ostream &os, const Chess &field) {
       if (piece.GetColor() == Piece::BLACK) {
         res += 32;
       }
-      os << res << '|';
     }
-    os << "_________________" << std::endl;
+    os << '|' << std::endl;
   }
   return os;
 }
