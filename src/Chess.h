@@ -85,6 +85,34 @@ class Chess {
    * @return SolutionCheck Result
    */
   SolutionCheck Solution();
+  ostream &operator<<(ostream &os, const Chess &board) {
+      for (board_row : board) {
+          for (Piece piece : board_row) {
+              int res = piece.GetPiece();
+              if (res == Chess::VOID) {
+                  res = ' ';
+              } else if (res == Chess::PAWN) {
+                  res = 'P';
+              } else if (res == Chess::ROOK) {
+                  res = 'R';
+              } else if (res == Chess::BISHOP) {
+                  res = 'B';
+              } else if (res == Chess::KNIGHT) {
+                  res = 'N';
+              } else if (res == Chess::QUEEN) {
+                  res = 'Q';
+              } else if (res == Chess::KING) {
+                  res = 'K';
+              }
+              if (piece.GetColor() == Chess::BLACK) {
+                  res += 32;
+              }
+              os << res;
+          }
+          os << std::endl;
+      }
+      return os;
+  }
 
  private:
   static constexpr uint8_t ChessFieldSize = 8;

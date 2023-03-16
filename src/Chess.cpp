@@ -61,27 +61,10 @@ int Chess::UnderAttackOnDiagonally(Piece::PieceColor ColorPiece, int xAxisPos,
       if (current.GetPiece() == Piece::BISHOP &&
           current.GetColor() != ColorPiece) {
         return Piece::BISHOP;
-      } else if (current.GetPiece() == Piece::QUEEN &&
-                 current.GetColor() != ColorPiece) {
-        return Piece::QUEEN;
-      } else if (fabs(xAxis - xAxisPos) == 1) {
-        if (current.GetPiece() == Piece::KING &&
-            current.GetColor() != ColorPiece) {
-          return Piece::KING;
-        } else if (current.GetPiece() == Piece::PAWN &&
-                   current.GetColor() != ColorPiece) {
-          if (ColorPiece == Piece::PieceColor::WHITE &&
-              (yAxis - yAxisPos) == 1) {
-            return Piece::PAWN;
-          } else if (ColorPiece == Piece::PieceColor::BLACK &&
-                     (yAxisPos - yAxis) == 1) {
-            return Piece::PAWN;
-          }
-        }
       }
       break;
     }
-    if (IncrementY == 1) {
+    if (i == 1) {
       IncrementY = -1;
       IncrementX = 1;
     } else {
@@ -105,18 +88,10 @@ int Chess::UnderAttackOnHorizontally(Piece::PieceColor ColorPiece, int xAxisPos,
       if (current.GetPiece() == Piece::ROOK &&
           current.GetColor() != ColorPiece) {
         return Piece::ROOK;
-      } else if (current.GetPiece() == Piece::QUEEN &&
-                 current.GetColor() != ColorPiece) {
-        return Piece::QUEEN;
-      } else if (fabs(xAxis - xAxisPos) == 1 || fabs(yAxis - yAxisPos) == 1) {
-        if (current.GetPiece() == Piece::KING &&
-            current.GetColor() != ColorPiece) {
-          return Piece::KING;
-        }
       }
       break;
     }
-    if (IncrementY == 1) {
+    if (i == 1) {
       IncrementY = -1;
       IncrementX = 0;
     } else {
@@ -130,14 +105,9 @@ int Chess::UnderAttackOnHorizontally(Piece::PieceColor ColorPiece, int xAxisPos,
 int Chess::IsUnderAttack(uint8_t positionNumber, uint8_t positionMarker) {
   int res{};
   Piece &target = GetPiece(positionNumber, positionMarker);
-  if (!*target) {
-    return res;
-  }
   res = UnderAttackOnDiagonally(target.GetColor(), positionNumber,
                                 positionMarker);
-  if (res) {
-    return res;
-  }
+  if (res) return res;
   return UnderAttackOnHorizontally(target.GetColor(), positionNumber,
                                    positionMarker);
 }
