@@ -259,7 +259,9 @@ TEST(Solution, functional_tests_with_pgsql) {
       std::ostringstream answer_query("");
       answer_query << "SELECT ANSWER FROM RESULT_VALUES WHERE ID = " << i;
       pqxx::result answer_check = worker.exec(answer_query.str());
+#ifdef OUTPUT
       std::cout << test;
+#endif
       switch (answer) {
         case Chess::NoCheck:
           std::cout << "In Test " << i << " King haven't Check" << std::endl;
