@@ -29,7 +29,8 @@ chess.so: clean $(HEADER_PIECE) $(HEADER_CHESS)
 	@echo "Object files deleted"
 
 dvi:
-
+	mkdir -p documentation
+	doxygen src/Doxyfile
 
 clean:
 	@echo "Start cleaning the project..."
