@@ -273,9 +273,6 @@ TEST(Solution, functional_tests_with_pgsql) {
     }
   } catch (std::exception const &e) {
     std::cerr << e.what() << std::endl;
-  }
-  if (i > 1) {
-  } else {
     throw std::logic_error("Test cases SQL is Failure");
   }
 }
