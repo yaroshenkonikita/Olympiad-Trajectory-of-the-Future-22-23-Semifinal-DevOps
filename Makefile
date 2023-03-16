@@ -1,4 +1,4 @@
-.PHONY: all chess.so test clean gcov_report
+.PHONY: all chess.so test clean gcov_report dvi
 
 CXX = g++
 CXX_FLAGS = -Wall -Werror -Wextra -std=c++17
@@ -27,6 +27,9 @@ chess.so: clean $(HEADER_PIECE) $(HEADER_CHESS)
 	@echo "Shared library built and copy to library path"
 	@rm lib/*.o
 	@echo "Object files deleted"
+
+dvi:
+
 
 clean:
 	@echo "Start cleaning the project..."
