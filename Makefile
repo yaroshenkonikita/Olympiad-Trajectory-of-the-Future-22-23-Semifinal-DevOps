@@ -1,4 +1,4 @@
-.PHONY: all chess.so test clean gcov_report dvi
+.PHONY: all chess.so test clean gcov_report dvi dist
 
 CXX = g++
 CXX_FLAGS = -Wall -Werror -Wextra -std=c++17
@@ -18,7 +18,7 @@ test: chess.so
 	./build/findCheck
 	@echo "Tests is Complete!"
 
-chess.so: clean $(HEADER_PIECE) $(HEADER_CHESS)
+chess.so: $(HEADER_PIECE) $(HEADER_CHESS)
 	@echo "Start building shared library..."
 	@mkdir -p lib
 	$(CXX) $(CXXFLAGS) -fPIC -c -o lib/piece.o src/Piece.cpp
@@ -30,13 +30,18 @@ chess.so: clean $(HEADER_PIECE) $(HEADER_CHESS)
 	@echo "Object files deleted"
 
 dvi:
-	mkdir -p documentation
+	@mkdir -p documentation
 	doxygen src/Doxyfile
+
+dist:
+	@mkdir -p dist
+	tar -cvzf dist/source.tar.gz src
+
 
 style:
 	clang-format -style=google -i $(ALL_SOURCE)
 
 clean:
 	@echo "Start cleaning the project..."
-	@-rm -rf build lib documentation /usr/lib/libchess.so
+	@-rm -rf build lib documentation dist /usr/lib/libchess.so
 	@echo "Project cleared"
