@@ -87,6 +87,14 @@ class Chess {
    * @return SolutionCheck Result
    */
   SolutionCheck Solution();
+  /**
+   * @brief Output chess board
+   * @details In the output, the chars matter: K - King; Q - Queen; N - Knight,
+   * B - Bishop; R - Rook; P - Pawn; and void mean void.
+   * @param os stream dist
+   * @param board board src
+   * @return self ostream os
+   */
   friend std::ostream &operator<<(std::ostream &os, const Chess &board);
 
  private:
