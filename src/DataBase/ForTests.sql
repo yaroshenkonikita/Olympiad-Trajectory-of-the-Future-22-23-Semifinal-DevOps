@@ -11,7 +11,7 @@ CREATE TABLE PIECES (
 );
 
 CREATE TABLE RESULT_VALUES (
-    ID BIGINT PRIMARY KEY,
+    ID BIGINT PRIMARY KEY AUTO_INCREMENT,
     ANSWER BIGINT NOT NULL
 );
 
@@ -119,3 +119,5 @@ INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 60, 
 INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 27, 17, 1, 'D', '5'), -- Шах от слона на 27 ходу,
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 26, 3, 2, 'C', '6'),  -- пешка на 26 была, но она в счет не должна идти.
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 27, 7, 2, 'B', '7');  -- Итого шах от слона
+
+INSERT INTO RESULT_VALUES(ANSWER) VALUES (7, 0, 5, 5, 5, 5, 7, 7, 7, 7, 0, 0, 0, 0, 0, 7, 0, 0, 0, 7);
