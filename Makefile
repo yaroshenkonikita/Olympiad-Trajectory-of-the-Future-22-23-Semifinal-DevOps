@@ -6,6 +6,9 @@ PQXX_FLAGS = $(shell pkg-config --libs --cflags libpqxx)
 ALL_SOURCE = $(shell find src/ \( -name "*.cpp" -or -name "*.h" \))
 HEADER_PIECE = src/Piece.h
 HEADER_CHESS = src/Chess.h
+ifeq (DEBUG, 1)
+	DEBUGFLAG = -DOUTPUT
+endif
 
 all: test dvi
 
@@ -13,7 +16,7 @@ test: chess.so
 	@echo "Start build test cases with shared library..."
 	@mkdir -p build
 	$(CXX) $(CXX_FLAGS) -c -o build/solution.o src/Solution.cpp
-	$(CXX) -Llib/ $(CXX_FLAGS) -DOUTPUT src/Tests/googletests.cpp build/solution.o -o build/findCheck -lchess $(PQXX_FLAGS) -lgtest -lgtest_main -lpthread -lm
+	$(CXX) -Llib/ $(CXX_FLAGS) $(DEBUGFLAG) src/Tests/googletests.cpp build/solution.o -o build/findCheck -lchess $(PQXX_FLAGS) -lgtest -lgtest_main -lpthread -lm
 	@echo "Test cases is built"
 	@echo "Start test cases"
 	./build/findCheck
