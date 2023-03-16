@@ -139,7 +139,7 @@ Chess::SolutionCheck Chess::Solution() {
 std::ostream &operator<<(std::ostream &os, const Chess &field) {
   for (auto &field_row : field.ChessField) {
     for (auto &piece : field_row) {
-      int res = piece.GetPiece();
+      char res = piece.GetPiece();
       if (res == Piece::VOID) {
         res = ' ';
       } else if (res == Piece::PAWN) {
