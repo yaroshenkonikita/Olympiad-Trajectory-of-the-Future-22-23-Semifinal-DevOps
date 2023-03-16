@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 
-#include <iostream>
 #include <pqxx/pqxx>
 
 #include "../Chess.h"
