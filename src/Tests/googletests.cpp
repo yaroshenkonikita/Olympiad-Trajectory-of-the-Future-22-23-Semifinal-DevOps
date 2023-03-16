@@ -227,10 +227,12 @@ TEST(Solution, functional_tests_with_pgsql) {
       Chess test(for_fill);
 
       std::ostringstream string_query("");
-      string_query << "SELECT MAX(MOVE_ID) MOVE, PIECE_ID, PIECE_COLOR, "
-                      "XAXISMARKER, YAXISNUMBER FROM TEST_VALUES "
-                      "WHERE GAME_ID = "
-                   << i << " AND MOVE = MOVE_ID GROUP BY GAME_ID, 2, 3, 4, 5";
+      string_query << "MOVE_ID, PIECE_ID, PIECE_COLOR, XAXISMARKER, "
+                      "YAXISNUMBER FROM TEST_VALUES WHERE GAME_ID = "
+                   << i
+                   << " AND MOVE_ID = (SELECT DISTINCT MAX(MOVE_ID) FROM TEST "
+                      "VALUES WHERE GAME_ID = "
+                   << i << ") GROUP BY GAME_ID, 2, 3, 4, 5";
 
       pqxx::result response = worker.exec(string_query.str());
       if (!response.size()) {
