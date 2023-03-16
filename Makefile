@@ -6,7 +6,7 @@ PQXX_FLAGS = $(shell pkg-config --libs --cflags libpqxx)
 HEADER_PIECE = src/Piece.h
 HEADER_CHESS = src/Chess.h
 
-all: test
+all: test dvi
 
 test: chess.so
 	@echo "Start build test cases with shared library..."
@@ -34,5 +34,5 @@ dvi:
 
 clean:
 	@echo "Start cleaning the project..."
-	@-rm -rf build lib /usr/lib/libchess.so
+	@-rm -rf build lib documentation /usr/lib/libchess.so
 	@echo "Project cleared"
