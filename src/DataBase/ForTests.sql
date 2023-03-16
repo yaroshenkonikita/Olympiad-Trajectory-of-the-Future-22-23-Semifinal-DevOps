@@ -43,8 +43,8 @@ INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 32, 
 INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 17, 1, 'C', '2'), -- Есть шах от ладьи
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 5, 2, 'C', '4');  -- горизонталь x = 0, y plus
 
-INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 17, 1, 'C', '2'), -- Есть шах от ладьи
-                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 5, 2, 'C', '0');  -- горизонталь x = 0, y minus
+INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 17, 1, 'C', '3'), -- Есть шах от ладьи
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 5, 2, 'C', '1');  -- горизонталь x = 0, y minus
 
 INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 17, 1, 'C', '2'), -- Есть шах от ладьи
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 5, 2, 'A', '2');  -- горизонталь x minus, y = 0
