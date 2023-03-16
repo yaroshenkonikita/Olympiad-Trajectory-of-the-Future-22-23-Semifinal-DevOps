@@ -2,6 +2,8 @@
 #define OLYMPIAD_TRAJECTORY_OF_THE_FUTURE_22_23_SEMIFINAL_DEVOPS_CHESS_H_
 
 #include <cmath>
+#include <iostream>
+#include <ostream>
 
 #include "Piece.h"
 
@@ -85,34 +87,7 @@ class Chess {
    * @return SolutionCheck Result
    */
   SolutionCheck Solution();
-  ostream &operator<<(ostream &os, const Chess &board) {
-    for (board_row : board) {
-      for (Piece piece : board_row) {
-        int res = piece.GetPiece();
-        if (res == Chess::VOID) {
-          res = ' ';
-        } else if (res == Chess::PAWN) {
-          res = 'P';
-        } else if (res == Chess::ROOK) {
-          res = 'R';
-        } else if (res == Chess::BISHOP) {
-          res = 'B';
-        } else if (res == Chess::KNIGHT) {
-          res = 'N';
-        } else if (res == Chess::QUEEN) {
-          res = 'Q';
-        } else if (res == Chess::KING) {
-          res = 'K';
-        }
-        if (piece.GetColor() == Chess::BLACK) {
-          res += 32;
-        }
-        os << res;
-      }
-      os << std::endl;
-    }
-    return os;
-  }
+  friend std::ostream &operator<<(std::ostream &os, const Chess &board);
 
  private:
   static constexpr uint8_t ChessFieldSize = 8;

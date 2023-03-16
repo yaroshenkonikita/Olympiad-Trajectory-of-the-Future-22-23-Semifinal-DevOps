@@ -135,3 +135,32 @@ Chess::SolutionCheck Chess::Solution() {
   }
   return NoCheck;
 }
+
+std::ostream &operator<<(std::ostream &os, const Chess &field) {
+    for (auto &field_row : field.ChessField) {
+        for (auto &piece : field_row) {
+            int res = piece.GetPiece();
+            if (res == Piece::VOID) {
+                res = ' ';
+            } else if (res == Piece::PAWN) {
+                res = 'P';
+            } else if (res == Piece::ROOK) {
+                res = 'R';
+            } else if (res == Piece::BISHOP) {
+                res = 'B';
+            } else if (res == Piece::KNIGHT) {
+                res = 'N';
+            } else if (res == Piece::QUEEN) {
+                res = 'Q';
+            } else if (res == Piece::KING) {
+                res = 'K';
+            }
+            if (piece.GetColor() == Piece::BLACK) {
+                res += 32;
+            }
+            os << res;
+        }
+        os << std::endl;
+    }
+    return os;
+}
