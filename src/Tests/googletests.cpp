@@ -236,8 +236,7 @@ TEST(Solution, functional_tests_with_pgsql) {
       pqxx::result response = worker.exec(string_query.str());
       if (!response.size()) {
         if (i == 1) {
-          std::cout << "No one test case..." << std::endl;
-          break;
+          throw std::logic_error("No tests in Data Base...");
         }
         std::cout << "Test Cases is Done!" << std::endl;
         std::cout << "Check result from test cases!" << std::endl;
