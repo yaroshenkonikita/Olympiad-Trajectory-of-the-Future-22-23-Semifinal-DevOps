@@ -1,5 +1,6 @@
 -- Запрос SQL для наполнения базы данных тестами.
 
+DROP TABLE IF EXISTS RESULT_VALUES;
 DROP TABLE IF EXISTS TEST_VALUES;
 DROP TABLE IF EXISTS PIECES_COLOR;
 DROP TABLE IF EXISTS PIECES;
@@ -7,6 +8,11 @@ DROP TABLE IF EXISTS PIECES;
 CREATE TABLE PIECES (
     ID BIGINT PRIMARY KEY,
     TITLE VARCHAR NOT NULL
+);
+
+CREATE TABLE RESULT_VALUES (
+    ID BIGINT PRIMARY KEY,
+    ANSWER BIGINT NOT NULL
 );
 
 INSERT INTO PIECES VALUES (3, 'PAWN'), (5, 'ROOK'), (7, 'BISHOP'), (11, 'KNIGHT'), (13, 'QUEEN'), (17, 'KING');
@@ -34,8 +40,29 @@ INSERT INTO TEST_VALUES VALUES (1, 20, 17, 1, 'F', '2'), (1, 20, 7, 2, 'B', '6')
 INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 32, 17, 1, 'C', '2'),
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 32, 5, 2, 'D', '4'); -- Нет шаха от ладьи
 
-INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 17, 1, 'C', '2'),
-                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 5, 2, 'C', '4'); -- Есть шах от ладьи
+INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 17, 1, 'C', '2'), -- Есть шах от ладьи
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 5, 2, 'C', '4');  -- горизонталь x = 0, y plus
+
+INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 17, 1, 'C', '2'), -- Есть шах от ладьи
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 5, 2, 'C', '0');  -- горизонталь x = 0, y minus
+
+INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 17, 1, 'C', '2'), -- Есть шах от ладьи
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 5, 2, 'A', '2');  -- горизонталь x minus, y = 0
+
+INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 17, 1, 'C', '2'), -- Есть шах от ладьи
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 42, 5, 2, 'E', '2');  -- горизонталь x plus, y = 0
+
+INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 20, 17, 1, 'D', '4'), -- Есть шах от слона
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 20, 7, 2, 'C', '3');  -- диагональ x - минус, y - минус
+
+INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 20, 17, 1, 'D', '4'), -- Есть шах от слона
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 20, 7, 2, 'E', '3');  -- диагональ x - плюс, y - минус
+
+INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 20, 17, 1, 'D', '4'), -- Есть шах от слона
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 20, 7, 2, 'C', '5');  -- диагональ x - минус, y - плюс
+
+INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 20, 17, 1, 'D', '4'), -- Есть шах от слона
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 20, 7, 2, 'E', '5');  -- диагональ x - плюч, y - плюс
 
 INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 34, 17, 1, 'C', '2'),
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 34, 3, 2, 'C', '3'),
