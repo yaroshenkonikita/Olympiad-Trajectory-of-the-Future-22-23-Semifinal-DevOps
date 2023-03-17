@@ -19,13 +19,6 @@ Piece &Piece::operator=(Piece &&other) noexcept {
   return *this;
 }
 
-Piece &Piece::operator=(
-    std::pair<Piece::ChessPiece, Piece::PieceColor> &pair) noexcept {
-  _piece = pair.first;
-  _color = pair.second;
-  return *this;
-}
-
 Piece::PieceFigure Piece::GetPiece() const noexcept { return _piece; }
 
 Piece::PieceColor Piece::GetColor() const noexcept { return _color; }

@@ -11,7 +11,7 @@ ifeq ($(DEBUG), 1)
 	DEBUGFLAG = -DOUTPUT
 endif
 
-all: test dvi dist gcov_report
+all: gcov_report dvi dist
 
 test: chess.so
 	@echo "Start build test cases with shared library..."
@@ -42,12 +42,12 @@ dist:
 	@mkdir -p dist
 	tar -cvzf dist/source.tar.gz src
 
-gcov_report: clean test
-	mkdir -p report
-	mkdir -p report/include
-	mv build/*.gc* report/include
-	mv lib/*.gc* report/include
-	-rm report/include/*googletests.gc*
+gcov_report: test
+	@mkdir -p report
+	@mkdir -p report/include
+	@mv build/*.gc* report/include
+	@mv lib/*.gc* report/include
+	@-rm report/include/*googletests.gc*
 	lcov -t build/findCheck -o report/include/findCheck.info --no-external -c -d .
 	genhtml -o report/report_html report/include/findCheck.info
 

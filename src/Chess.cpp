@@ -99,7 +99,7 @@ int Chess::UnderAttackOnHorizontally(Piece::PieceColor ColorPiece, int xAxisPos,
       ++IncrementY;
     }
   }
-  return 0;
+  return Piece::VOID;
 }
 
 int Chess::IsUnderAttack(uint8_t positionNumber, uint8_t positionMarker) {
