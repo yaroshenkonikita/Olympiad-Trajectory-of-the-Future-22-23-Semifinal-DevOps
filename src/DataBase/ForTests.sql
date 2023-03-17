@@ -65,8 +65,8 @@ INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 20, 
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 20, 7, 2, 'E', '5');  -- диагональ x - плюч, y - плюс
 
 INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 34, 17, 1, 'C', '2'),
-                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 34, 3, 2, 'C', '3'),
-                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 34, 5, 2, 'C', '4'); -- Нет шаха от ладьи, зыкрывает пешка
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 34, 11, 2, 'C', '3'),
+                               ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 34, 5, 2, 'C', '4'); -- Нет шаха от ладьи, зыкрывает конь
 
 INSERT INTO TEST_VALUES VALUES ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 53, 17, 1, 'C', '2'),
                                ((SELECT MAX(GAME_ID) FROM TEST_VALUES) + 1, 53, 5, 2, 'B', '3'),
