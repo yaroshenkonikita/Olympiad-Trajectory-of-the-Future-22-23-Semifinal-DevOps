@@ -87,13 +87,6 @@ class Piece {
    */
   Piece &operator=(Piece &&other) noexcept;
   /**
-   * @brief Operator replace from pair
-   *
-   * @param other piece
-   * @return this object
-   */
-  Piece &operator=(std::pair<PieceFigure, PieceColor> &pair) noexcept;
-  /**
    * @brief Operator equal
    *
    * @param other piece
