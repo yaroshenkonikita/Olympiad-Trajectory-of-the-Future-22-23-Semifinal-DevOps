@@ -37,7 +37,6 @@ test_functional:
   tags:
     - test
   script:
-    - export DEBUG=$DEBUG
     - make test
   artifacts:
     paths:
