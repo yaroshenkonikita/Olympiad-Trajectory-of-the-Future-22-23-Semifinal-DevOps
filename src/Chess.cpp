@@ -71,7 +71,7 @@ int Chess::UnderAttackOnDiagonally(Piece::PieceColor ColorPiece, int xAxisPos,
       IncrementY += 2;
     }
   }
-  return 0;
+  return Piece::VOID;
 }
 
 int Chess::UnderAttackOnHorizontally(Piece::PieceColor ColorPiece, int xAxisPos,
@@ -103,10 +103,9 @@ int Chess::UnderAttackOnHorizontally(Piece::PieceColor ColorPiece, int xAxisPos,
 }
 
 int Chess::IsUnderAttack(uint8_t positionNumber, uint8_t positionMarker) {
-  int res{};
   Piece &target = GetPiece(positionNumber, positionMarker);
-  res = UnderAttackOnDiagonally(target.GetColor(), positionNumber,
-                                positionMarker);
+  int res = UnderAttackOnDiagonally(target.GetColor(), positionNumber,
+                                    positionMarker);
   if (res) return res;
   return UnderAttackOnHorizontally(target.GetColor(), positionNumber,
                                    positionMarker);
