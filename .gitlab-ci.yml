@@ -3,6 +3,8 @@ stages:
   - style_test
   - rebuild_database
   - functional_test
+  - build_documentation
+  - source_code_tar
 
 test_build:
   stage: build_test
@@ -43,3 +45,27 @@ test_functional:
       - build/chess
     expire_in: 30 days
   needs: ["build_database"]
+
+documentation:
+  stage: build_documentation
+  tags:
+    - build
+  script:
+    - make dvi
+  artifacts:
+    paths:
+      - documentation
+    expire_in: 30 days
+  needs: [ "test_functional" ]
+
+src_tar:
+  stage: source_code_tar
+  tags:
+    - build
+  script:
+    - make dist
+  artifacts:
+    paths:
+      - dist
+    expire_in: 30 days
+  needs: [ "test_functional" ]
