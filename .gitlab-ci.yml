@@ -5,6 +5,7 @@ stages:
   - functional_test
   - build_documentation
   - source_code_tar
+  - report
 
 test_build:
   stage: build_test
@@ -71,13 +72,13 @@ src_tar:
   needs: [ "test_functional" ]
 
 gcov_report:
-  stage: source_code_tar
+  stage: report
   tags:
     - build
   script:
-    - make dist
+    - make gcov_report
   artifacts:
     paths:
-      - dist
+      - report
     expire_in: 30 days
   needs: [ "test_functional" ]
