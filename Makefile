@@ -6,7 +6,7 @@ PQXX_FLAGS = $(shell pkg-config --libs --cflags libpqxx)
 ALL_SOURCE = $(shell find src/ \( -name "*.cpp" -or -name "*.h" \))
 HEADER_PIECE = src/Piece.h
 HEADER_CHESS = src/Chess.h
-ifeq ($DEBUG, 1)
+ifeq ($($DEBUG), 1)
 	DEBUGFLAG = -DOUTPUT
 endif
 
