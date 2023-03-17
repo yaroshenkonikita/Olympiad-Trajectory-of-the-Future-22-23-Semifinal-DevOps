@@ -47,7 +47,7 @@ gcov_report: clean test
 	mkdir -p report/include
 	mv build/*.gc* report/include
 	mv lib/*.gc* report/include
-	rm report/include/*googletests.gc*
+	-rm report/include/*googletests.gc*
 	lcov -t build/findCheck -o report/include/findCheck.info --no-external -c -d .
 	genhtml -o report/report_html report/include/findCheck.info
 
