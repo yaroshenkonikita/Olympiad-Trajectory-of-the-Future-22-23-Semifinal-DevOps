@@ -20,7 +20,7 @@ test: chess.so
 	$(CXX) -Llib/ $(CXX_FLAGS) $(GCOV_FLAGS) $(DEBUGFLAG) src/Tests/googletests.cpp build/solution.o -o build/findCheck -lchess $(PQXX_FLAGS) -lgtest -lgtest_main -lpthread -lm
 	@echo "Test cases is built"
 	@echo "Start test cases"
-	-./build/findCheck
+	./build/findCheck
 	@echo "Tests is Complete!"
 
 chess.so: $(HEADER_PIECE) $(HEADER_CHESS)
