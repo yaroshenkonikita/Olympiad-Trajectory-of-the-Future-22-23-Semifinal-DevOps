@@ -27,7 +27,7 @@ Chess::SolutionCheck Chess::Solution() {
 std::ostream &operator<<(std::ostream &os, const Chess &field) {
   os << "  A B C D E F G H " << std::endl;
   for (int i = 7; i >= 0; --i) {
-    os << (char)i + '1' << '|';
+    os << (char)(i + '1') << '|';
     for (int j = 0; j < 8; ++j) {
       char res = field.ChessField[i][j].GetPiece();
       if (res == Piece::VOID) {
