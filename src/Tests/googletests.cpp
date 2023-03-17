@@ -215,7 +215,7 @@ TEST(Chess, no_attack_on_horizontally_y_minus) {
   clear_field.GetPiece(positionKingX, 2) = rook_black;
   clear_field.GetPiece(positionKingX, 3) = rook_white;
   EXPECT_EQ(clear_field.IsUnderAttack(positionKingX, positionKingY),
-            Piece::PieceFigure::ROOK);
+            Piece::VOID);
 }
 
 TEST(Solution, find_white_king) {
