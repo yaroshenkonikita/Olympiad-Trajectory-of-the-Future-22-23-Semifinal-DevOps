@@ -215,8 +215,7 @@ TEST(Solution, mini_test_solution) {
 
 TEST(Solution, functional_tests_with_pgsql) {
   try {
-    std::string conn_string =
-        "host=localhost dbname=chess user=postgres password=1";
+    std::string conn_string = "host=localhost dbname=chess user=gitlab-runner";
     pqxx::connection connectionObject(conn_string);
     pqxx::work worker(connectionObject, "Functional Test");
 
