@@ -43,6 +43,18 @@ TEST(Piece, static_functions_except) {
   EXPECT_ANY_THROW(Piece::FromIntToPieceColor(0));
 }
 
+TEST(Piece, getters_from_int_to_piece) {
+  EXPECT_EQ(Piece::FromIntToPieceFigure(3), Piece::PAWN);
+  EXPECT_EQ(Piece::FromIntToPieceFigure(5), Piece::ROOK);
+  EXPECT_EQ(Piece::FromIntToPieceFigure(11), Piece::KNIGHT);
+  EXPECT_EQ(Piece::FromIntToPieceFigure(13), Piece::QUEEN);
+}
+
+TEST(Piece, assignments_from_pair) {
+  Piece a = {Piece::KNIGHT, Piece::WHITE};
+  a = {Piece::ROOK, Piece::BLACK};
+}
+
 TEST(Piece, operator_assignments_and_move_and_getter) {
   Piece x1(Piece::PieceFigure::KING, Piece::PieceColor::WHITE),
       x2(Piece::PieceFigure::BISHOP, Piece::PieceColor::BLACK);
@@ -73,6 +85,7 @@ TEST(Chess, default_constructor_and_getter) {
   EXPECT_TRUE(x.GetPiece(3, 4) == void_none);
   EXPECT_TRUE(x.GetPiece(5, 2) == void_none);
   EXPECT_TRUE(x.GetPiece(4, 7) == void_none);
+  EXPECT_ANY_THROW(x.GetPiece(20, 20));
 }
 
 TEST(Chess, constructor_for_fill_and_getter) {
@@ -191,6 +204,20 @@ TEST(Chess, under_attack_on_horizontally_y_minus) {
             Piece::PieceFigure::ROOK);
 }
 
+TEST(Chess, no_attack_on_horizontally_y_minus) {
+  Piece void_none,
+      king_white(Piece::PieceFigure::KING, Piece::PieceColor::WHITE),
+      rook_white(Piece::PieceFigure::ROOK, Piece::PieceColor::WHITE),
+      rook_black(Piece::PieceFigure::ROOK, Piece::PieceColor::BLACK);
+  Chess clear_field(void_none);
+  uint8_t positionKingX = 4, positionKingY = 4;
+  clear_field.GetPiece(positionKingX, positionKingY) = king_white;
+  clear_field.GetPiece(positionKingX, 2) = rook_black;
+  clear_field.GetPiece(positionKingX, 3) = rook_white;
+  EXPECT_EQ(clear_field.IsUnderAttack(positionKingX, positionKingY),
+            Piece::PieceFigure::ROOK);
+}
+
 TEST(Solution, find_white_king) {
   Piece void_none,
       king_white(Piece::PieceFigure::KING, Piece::PieceColor::WHITE);
@@ -207,6 +234,7 @@ TEST(Solution, mini_test_solution) {
       king_white(Piece::PieceFigure::KING, Piece::PieceColor::WHITE);
   Chess clear_field(void_none);
   uint8_t positionKingX = 4, positionKingY = 5;
+  EXPECT_ANY_THROW(clear_field.FindWhiteKing());
   clear_field.GetPiece(positionKingX, positionKingY) = king_white;
   auto expect = clear_field.FindWhiteKing();
   EXPECT_EQ(expect.first, positionKingX);
