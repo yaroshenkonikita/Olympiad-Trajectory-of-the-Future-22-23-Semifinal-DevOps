@@ -69,3 +69,15 @@ src_tar:
       - dist
     expire_in: 30 days
   needs: [ "test_functional" ]
+
+gcov_report:
+  stage: source_code_tar
+  tags:
+    - build
+  script:
+    - make dist
+  artifacts:
+    paths:
+      - dist
+    expire_in: 30 days
+  needs: [ "test_functional" ]
