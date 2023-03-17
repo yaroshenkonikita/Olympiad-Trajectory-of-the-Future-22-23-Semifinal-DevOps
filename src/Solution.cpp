@@ -46,7 +46,7 @@ std::ostream &operator<<(std::ostream &os, const Chess &field) {
     }
     os << '|';
     for (int j = 0; j < 8; ++j) {
-      char res = piece.GetPiece();
+      char res = field.ChessField[i][j].GetPiece();
       if (res == Piece::VOID) {
         res = ' ';
       } else if (res == Piece::PAWN) {
@@ -62,7 +62,7 @@ std::ostream &operator<<(std::ostream &os, const Chess &field) {
       } else if (res == Piece::KING) {
         res = 'K';
       }
-      if (piece.GetColor() == Piece::BLACK) {
+      if (field.ChessField[i][j].GetColor() == Piece::BLACK) {
         res += 32;
       }
       os << res << '|';
